@@ -1,7 +1,7 @@
-// import obiektu statycznego out
+// import statycznej referencji obiektu out
 import static java.lang.System.out;
 // import wszystkich statycznych członków Integer
-import static java,lang.Integer.*;
+import static java.lang.Integer.*;
 
 public class TestStatic {
 	public static void main(String[] args) {
