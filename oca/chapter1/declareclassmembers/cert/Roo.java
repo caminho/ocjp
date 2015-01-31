@@ -1,7 +1,7 @@
 package cert;
 
 public class Roo {
-	public String doRooThings() {
+	private String doRooThings() {
 		return "fun";
 	}
 }
