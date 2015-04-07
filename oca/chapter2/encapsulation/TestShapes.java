@@ -4,7 +4,16 @@ class GameShape {
 	}
 }
 
-class PlayerPiece extends GameShape {
+interface Animatable {
+	public void animate();
+}
+
+class PlayerPiece extends GameShape implements Animatable {
+	@Override
+	public void animate() {
+		System.out.println("animating player");
+	}
+	
 	public void movePiece() {
 		System.out.println("moving game piece");
 	}
@@ -22,6 +31,14 @@ public class TestShapes {
 		TilePiece tile = new TilePiece();
 		doShapes(shape);
 		doShapes(tile);
+		
+		if (shape instanceof GameShape) {
+			System.out.println("player is a game shape!");
+		}
+		
+		if (shape instanceof Animatable) {
+			System.out.println("player is animatable!");
+		}
 	}
 	
 	public static void doShapes(GameShape shape) {
