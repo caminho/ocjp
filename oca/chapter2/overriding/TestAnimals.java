@@ -9,6 +9,10 @@ class Horse extends Animal {
 		System.out.println("Horse eating!");
 	}
 	
+	void test() {
+		super.eat();
+	}
+	
 	public void buck() {}
 }
 
