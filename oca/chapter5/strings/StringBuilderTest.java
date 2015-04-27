@@ -24,6 +24,5 @@ public class StringBuilderTest {
 		sb = new StringBuilder("Test string");
 		System.out.println(sb.toString());
 		
-		
 	}
 }
