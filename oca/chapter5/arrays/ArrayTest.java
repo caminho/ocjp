@@ -110,3 +110,4 @@ public class ArrayTest {
 	public static void takeAnArray(int[] someArray) {
 	}
 }
+
