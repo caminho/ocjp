@@ -5,7 +5,10 @@ class Beer {}
 interface Foldable{}
 class Box implements Foldable {}
 
-class ArrayAssignments {
+class A{}
+class B extends A{}
+
+public class ArrayAssignments {
 	public static void main(String[] args) {
 	
 		int[] splats;
@@ -35,5 +38,18 @@ class ArrayAssignments {
 		int aNumber = 7;
 		// books[0] = aNumber; // źle - zła liczba wymiarów
 		books[0] = numbers; // ok - numbers to tablica
+		
+		A[] a;
+		B[] b;
+		a = new A[5]; // OK
+		a = new B[5]; // OK
+		b = new B[5]; // OK
+		a = b;
+		// b = a; // ŹLE: error: incompatible types
+		b = (B[])a;
+		a = new A[5];
+		// b = (B[])a; // ŹLE: ClassCastException
+		// b = new A[5]; // ŹLE: error: incompatible types
 	}
 }
+

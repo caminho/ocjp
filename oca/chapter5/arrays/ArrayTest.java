@@ -34,11 +34,23 @@ public class ArrayTest {
 		myArray[1][1] = 8;
 		myArray[1][2] = 5;
 
+		Animal[][] animalArray2d = new Animal[10][5];
+		//System.out.println(animalArray2d[0].length); // 5
+		//System.out.println(animalArray2d[0][0]); // null
+		
+		int[][] intArray = new int[2][2];
+		//System.out.println(intArray[1][0]); // 0
+		//System.out.println(intArray[1]); // object descriptor
+		int[][] intArray2 = new int[2][];
+		//System.out.println(intArray2[1][0]); // NullPointerException
+		//System.out.println(intArray2[1]); // null
+		
 		// Inicjalizacja tablicy
 		Animal[] pets = new Animal[3];
 		pets[0] = new Animal();
 		pets[1] = new Animal();
 		pets[2] = new Animal();
+		
 		// pets[-1] = new Animal(); // ŹLE - skompiluje sie, ale wyjatek w czasiw wykonania
 		
 		int[][] scores = new int[3][];
@@ -65,7 +77,7 @@ public class ArrayTest {
 		Dog[] myDogs = {puppy, new Dog(), new Dog(), new Dog()};
 		int[][] scores2d = {{1,2,3}, null, {}};
 		int[] emptyTab = {};
-		System.out.println("emptyTab.length = " + emptyTab.length);
+		// System.out.println("emptyTab.length = " + emptyTab.length); // 0
 		
 		// Anonimowe tablice
 		dots = new int[]{12, 23, 34};
