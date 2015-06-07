@@ -1,7 +1,101 @@
 Exam watch
-----------
+===============================================================================
 
-Tablice i ArrayList
+-------------------------------------------------------------------------------
+WSKAZÓWKI DO EGZAMINU
+-------------------------------------------------------------------------------
+
+I) Wielu doświadczonych egzaminowanych nie wraca do pytań, na które udzielili 
+   odpowiedź. Rób tak tylko w przypadku, gdy czujesz, że źle zrozumiałeś 
+   pytanie, lub gdy źle je zinterpretowałeś za pierwszym razem. Nerwowość może
+   prowadzić do pogorszenia odpowiedzi.
+   
+II) Widząc w zadaniu kod, którego numery linii zaczynają się od 1, masz do 
+   czynienia z pełnym kodem źródłowym. Jeśli numery linii zaczynają się dalej
+   niż od 1, załóż, że początek kodu, którego nie widać, jest poprawny (np.
+   importy się zgadzają).
+   
+IV) Jeśli utkniesz na pytaniu wielokrotnego wyboru, użyj kartki/tablicy, aby
+   spisać 2-3 najmocniejsze odpowiedzi i podkreśl tę, która wydaje się 
+   najbardziej poprawna. Po pierwszym przebiegu testu taka notatka może 
+   wyglądać np. tak:
+   	21._B_ lub C 
+   	33. A lub _C_
+   	
+   Jest to przydatne, gdy oznaczasz zadania i kontynuujesz. Możesz później
+   wrócić do takiego zadania i od razu kontunuować proces myślowy, który
+   porzuciłeś przy tym pytaniu. Technika ta pozwala na kontynuowanie zadania
+   bez zbędnego przypominania sobie szczegółów zadania/procesu myślowego.
+   Kartka papieru przyda się także przy wizualizacji zadań opisanych tekstem,
+   aby je lepiej zrozumieć.      	
+   	
+V) Nie ma kar za złe odpowiedzi, zawsze warto zaznaczyć coś niż nic.
+
+VI) Dobra strategia na rozwiązywanie testu:
+ 
+	1. Przejdź szybko przez wszystkie zadania i odpowiedz na pytania,
+	   co do których masz pewność i odpowiedź szybko przychodzi do głowy.
+	   Czytaj pobieżnie treści zadań, rozpoznając typ i przedmiot zadania.
+
+	   Jeśli nie jesteś przekonany co do odpowiedzi, zaznacz tą, która
+	   na pierwszy rzut oka jest dobra i oznacz (Mark) pytanie do 
+	   przejrzenia na potem.	   
+	   
+   	   Spróbuj spędzić na ten cykl mniej niż 25% czasu testu.
+	   
+	2. Przejdź przez wszystkie zadania jeszcze raz. Z poprzedniej fazy
+	   wiesz już, na ile skomplikowany jest test i ile mniej więcej
+	   czasu potrzebujesz średnio na każde zadanie. Spróbuj ustalić
+	   kamienie milowe, np. "muszę rozwiązań 10 pytań co każde 15 minut".
+	   W tej fazie lepiej omijać czasochłonne pytania i oznaczać je
+	   na później.
+	   	   
+   	   Spróbuj skończyć ten cykl w momencie 50-60% czasu testu.
+	
+	3. W trzeciej fazie wróć do pytań, które oznaczyłeś do przejrzenia.
+	   Faza ta obejmuje ponowny wgląd na zadania, co do których nie miałeś
+	   pewności w dwóch poprzednich fazach i rozwiązywanie zadań 
+	   czasochłnnych. Ciocaj je, do póki nie zrobisz wszystkich.
+	   
+	   Na koniec tego etapu powinieneś mieć odpowiedzi na wszystkie
+	   pytania. Jeśli w kolejnej fazie zabraknie ci czasu, przynajmniej
+	   na każde pytanie masz jakąś odpowiedź. 
+	   
+	   Dobrze, jeśli kończąc ten etap, zostanie ci jeszcze 10-20% czasu 
+	   testu. 
+	   
+	4. Ostatni etap, gdy zrobisz wszystkie zadania - sprawdzenie 
+	   odpowiedzi. Zrób jeszcze jeden przebieg przez wszystkie pytania,
+	   pobieżnie analizując pytanie i udzieloną odpowiedź. Ostrożnie
+	   analizuj zadania, aby sprawdzić, czy nie ma jakiegoś haczyka.
+	   Szczególnie uważaj na pytanie, których jedną z odpowiedzi jest
+	   "Błąd kompilacji". Możesz jeszcze odnaleźć ukryte błędy w zadaniu,
+	   to jest twoja ostatnia szansa na poprawienie odpowiedzi.
+	   
+    Korzyścią z takiego podejścia jest to, że nawet pobieżne rozwiązywanie 
+    zadań odświeża pamięć i może pomóc w rozwiązaniu zadań, które wcześniej 
+    opuściliśmy.
+
+VII) Ostrożnie analizuj kod źródłowy. Jeśli jedną z odpowiedzi jest "Błąd 
+    kompilacji", najpierw dokładnie sprawdź składnię kodu, czy nie brakuje
+    nawiasów okrądłych, średników, nawiasów wąsiastych (otwierających
+    i zamykających w poprawnej kolejności), zwracaj uwagę na wielkość liter.
+    
+    Dopiero gdy kod się kompiluje, szukaj ewentualnych wyjątków, o ile jedną
+    z odpowiedzi jest "Wyrzucenie wyjątku".
+    
+    Gdy upewnisz się, że nie ma błędu kompilacji ani nie są wyrzucane wyjątki,
+    wtedy dopiero analizuj dogłębnie logikę kodu, np. przebiegi pętli i wartości
+    zmiennych.
+    
+VIII) Przed egzaminem sprawdź, czy ośrodek certyfikujący należycie wyposaży cię
+    w potrzebne akcesoria: kartki i długopis albo odpowiednio duża tablica
+    i ścieralne mazaki.
+   	
+-------------------------------------------------------------------------------
+TABLICE I ARRAYLIST
+-------------------------------------------------------------------------------
+
 1) Uważaj na liczbę obiektów przy konstrukcji tablic - 
    instrukcja:
 		Object[] x = new Object[5];
@@ -41,7 +135,10 @@ Tablice i ArrayList
    liczba 5 jest opakowywana (autoboxing) w typ Integer i obiekt
    tej klasy jest przekazywany do metody add.
    
-Wyjątki i instrukcje sterujące
+-------------------------------------------------------------------------------
+INSTRUKCJE STERUJĄCE
+-------------------------------------------------------------------------------
+
 7) Uważaj na instrukcję przypisania w wyrażeniu warunkowym instrukcji if,
    np.
 		boolean boo = false;
@@ -52,14 +149,14 @@ Wyjątki i instrukcje sterujące
 		if (boo =! false) {
 			...
 		}
-	W pierwszym przypadku warunek będzie zawsze prawdziwy, bo wyrażenie
-	przyjmie wartość zmiennej boo, której przypisujemy wartość true.
-	NIE jest to instrukcja sprawdzająca!
-	Drugi przypadek może do złudzenia przypominać operator "rożne od" -
-	!=, ale w rzeczywistości jest to przypisanie !false, czyli true -
-	więc warunek zawsze będzie prawdziwy.
-	Pamiętaj też, że liczby całkowite nie mogą być wyrażeniem 
-	warunkowym, więc poniższe instrukcje są błędne:
+   W pierwszym przypadku warunek będzie zawsze prawdziwy, bo wyrażenie
+   przyjmie wartość zmiennej boo, której przypisujemy wartość true.
+   NIE jest to instrukcja sprawdzająca!
+   Drugi przypadek może do złudzenia przypominać operator "rożne od" -
+   !=, ale w rzeczywistości jest to przypisanie !false, czyli true -
+   więc warunek zawsze będzie prawdziwy.
+   Pamiętaj też, że liczby całkowite nie mogą być wyrażeniem 
+   warunkowym, więc poniższe instrukcje są błędne:
 		int x = 1;			// ŹLE
 		if (x) ...			// ŹLE
 		if (x = 1) ...		// ŹLE
@@ -98,8 +195,8 @@ Wyjątki i instrukcje sterujące
 
 11) Uważaj na zakres zmiennych lokalnych. Ma to duże znaczenie na egzaminie.
     Pamiętaj, że zmienna zadeklarowana w kroku inicjalizacji pętli for nie
-	jest widoczna poza blokiem pętli for, ale możesz użyć zmiennej zdefinio-
-	wanej wcześniej:
+    jest widoczna poza blokiem pętli for, ale możesz użyć zmiennej zdefinio-
+    wanej wcześniej:
 	int x = 3;
 	for (x = 0; x < 20; x++) {}
 	System.out.println(x);			// OK
@@ -107,13 +204,24 @@ Wyjątki i instrukcje sterujące
 	System.out.println(i);			// ŹLE - zmienna i już nie istnieje
 	
 12) Wiele pytać na egzaminie ma w liście odpowiedzi "Compilation fails" albo
-	"An exception occurs on runtime". Dokładnie sprawdź najpierw, czy kod
-	się skompiluje, następnie czy nie wystąpi wyjątek w czasie wykonania.
-	Dopiero wtedy analizuj logikę kodu.
+    "An exception occurs on runtime". Dokładnie sprawdź najpierw, czy kod
+    się skompiluje, następnie czy nie wystąpi wyjątek w czasie wykonania.
+    Dopiero wtedy analizuj logikę kodu.
 	
 13) Pamiętaj, że instrukcja continue musi być w środku PĘTLI, inaczej
     dostaniesz błąd kompilacji. Instrukcja break może być użyta w pętli
-	lub w instrukcji switch.
+    lub w instrukcji switch.
     Brak i continue z etykietami muszą znajdować się w pętli, która oznaczona
     jest taką samą etykietą.
-	
+
+-------------------------------------------------------------------------------
+WYJĄTKI
+-------------------------------------------------------------------------------
+
+14) Nie wolno używać klauzuli try jednocześnie bez klauzul catch i finally. 
+    Sama klauzula try spowoduje błąd kompilacji. Każda klauzula catch musi 
+    znajdować się bezpośrednio po bloku try. Klauzula finally musi znajdować
+    się bezpośrednio po ostatnim bloku catch (lub po bloku try, jeśli nie ma żadnej
+    klauzuli catch). Można pominąć klauzulę catch albo finally, ale nie obie naraz.
+    
+15) 
