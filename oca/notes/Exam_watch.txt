@@ -1,0 +1,119 @@
+Exam watch
+----------
+
+Tablice i ArrayList
+1) Uważaj na liczbę obiektów przy konstrukcji tablic - 
+   instrukcja:
+		Object[] x = new Object[5];
+   tworzy jeden obiekt na stosie - jest to obiekt tablicy, której elementy
+   inicjalizowane są wartościami null
+   
+2) Widząc określenia takie jak "skonstruuj" ("construct"), "utwórz"
+   ("create"), "stwórz instancję" ("instantiate") wiedz, że oznaczają one
+   "obiekt tworzony jest na STERCIE". Stąd wiadomo, że konstruktor
+   obiektu jest uruchamiany (i konstruktory nadklas).
+   
+3) Zwracaj uwagę na kod, który próbuje użyć niedozwolonego indeksu 
+   tablicy. Indeks ujemny lub przekraczający indeks ostatniego
+   elementu jest niedozwolony i spowoduje wyrzucenie wyjątku
+   w czasie wykonania ArrayIndexOutOfBoundsException.
+   
+4) Pamiętaj, że nie wolno specyfikować rozmiaru tablicy przy stosowaniu
+   składni tworzenia tablic anonimowych. Rozmiar jest dedukowany z liczby
+   elementów rozdzielonych przecinkiem. Następujący kod jest błędny:
+		int[] x = new int[2]{1, 2};  // ŹLE!
+   Powinno być:	
+		int[] x = new int[]{1, 2};  // OK
+		
+5) Pamiętaj, że przypisując tablicę obiektów zmiennej referencyjnej,
+   możesz przypisać tablicę o typie tej zmiennej lub tablicę obiektów
+   podtypu tej zmiennej, ale nie na odwrót. Przykład:
+   class A{}
+   class B extends A{}
+   ...
+   A[] a;
+   B[] b;
+   a = new B[5]; // OK
+   b = new A[5]; // ŹLE!
+		
+6) ArrayList przechowuje referencje do obiektów. Jeśli zauważysz
+   instrukcje w rodzaju: myArrayList.add(5), w rzeczywistości
+   liczba 5 jest opakowywana (autoboxing) w typ Integer i obiekt
+   tej klasy jest przekazywany do metody add.
+   
+Wyjątki i instrukcje sterujące
+7) Uważaj na instrukcję przypisania w wyrażeniu warunkowym instrukcji if,
+   np.
+		boolean boo = false;
+		if (boo = true) {
+			...
+		}
+   albo:
+		if (boo =! false) {
+			...
+		}
+	W pierwszym przypadku warunek będzie zawsze prawdziwy, bo wyrażenie
+	przyjmie wartość zmiennej boo, której przypisujemy wartość true.
+	NIE jest to instrukcja sprawdzająca!
+	Drugi przypadek może do złudzenia przypominać operator "rożne od" -
+	!=, ale w rzeczywistości jest to przypisanie !false, czyli true -
+	więc warunek zawsze będzie prawdziwy.
+	Pamiętaj też, że liczby całkowite nie mogą być wyrażeniem 
+	warunkowym, więc poniższe instrukcje są błędne:
+		int x = 1;			// ŹLE
+		if (x) ...			// ŹLE
+		if (x = 1) ...		// ŹLE
+		if (
+	
+8) Uważaj na naruszenia składni instrukcji switch-case:
+	switch(x) {
+		case 0 {		// ŹLE - brak dwukropka po "case 0"
+			y = 7;
+		}
+	}
+	switch (x) {
+		0: {}			// ŹLE - brak słowa kluczowego "case"
+		1: {}
+	}
+	
+9) Pamiętaj, że "default" w instrukcji switch może znaleźć się 
+   w dowolnym miejscu między etykietami "case", wcale nie musi być
+   na końcu! Np.:
+	switch(x) {
+		case 0: {}
+		default: {}
+		case 1: {}
+	}
+   Po prostu pamiętaj, że default rządzi się takimi samymi regułami jak
+   etykiety case, z tym, że nie jest powiązane ze stałą.
+   
+10) Podobnie jak przy instrukcji if, uważaj na wyrażenia warunkowe w pętlach,
+   np.:
+	int x = 1;
+	while (x) {}  		// ŹLE
+	while (x = 1) {} 	// ŹLE
+	while (x == 1) {}	// OK
+	while (true) {}		// OK
+	while (false) {}	// ŹLE: error: unreachable statement
+
+11) Uważaj na zakres zmiennych lokalnych. Ma to duże znaczenie na egzaminie.
+    Pamiętaj, że zmienna zadeklarowana w kroku inicjalizacji pętli for nie
+	jest widoczna poza blokiem pętli for, ale możesz użyć zmiennej zdefinio-
+	wanej wcześniej:
+	int x = 3;
+	for (x = 0; x < 20; x++) {}
+	System.out.println(x);			// OK
+	for (int i = 0; i < 0; i++) {}
+	System.out.println(i);			// ŹLE - zmienna i już nie istnieje
+	
+12) Wiele pytać na egzaminie ma w liście odpowiedzi "Compilation fails" albo
+	"An exception occurs on runtime". Dokładnie sprawdź najpierw, czy kod
+	się skompiluje, następnie czy nie wystąpi wyjątek w czasie wykonania.
+	Dopiero wtedy analizuj logikę kodu.
+	
+13) Pamiętaj, że instrukcja continue musi być w środku PĘTLI, inaczej
+    dostaniesz błąd kompilacji. Instrukcja break może być użyta w pętli
+	lub w instrukcji switch.
+    Brak i continue z etykietami muszą znajdować się w pętli, która oznaczona
+    jest taką samą etykietą.
+	

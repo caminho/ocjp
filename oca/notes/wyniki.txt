@@ -1,0 +1,46 @@
+Whizlabs
+--------
+
+Diagnostic Test - 29 i 30 maja
+Co mi słabo poszło:
+	- inicjalizacja tablic wielowymiarowych
+	- działanie ArrayList
+	- wyjątki 
+		- chained exceptions (initCause())
+		- nazwy, przeznaczenie i miejsce w hierarchii wyjątków Java/JVM
+		  (czy sprawdzane, niesprawdzane itd.)
+	- osiągalność kodu (nieosiągalny kod - błąd kompilacji!)
+	- break, continue
+	- metody abstrakcyjne - teoria
+	- rozróżnienie pomiędzy typem referencji a typem obiektu
+	
+Practice Test I - 30 maja
+Co mi słabo poszło:
+	- inicjalizacja tablic wielowymiarowych
+	- działanie ArrayList
+	- wyjątki
+		- osiągalność kodu
+		- klauzula finally
+		- chained exceptions (initCause())
+		- nazwy, przeznaczenie i miejsce w hierarchii wyjątków Java/JVM
+		  (czy sprawdzane, niesprawdzane itd.)
+		- hierarchia IndexOutOfBoundsException
+		- klasa Throwable
+	- asercje - teoria
+	- osiągalność kodu (nieosiągalny kod - błąd kompilacji!)
+		- pętla while
+	- czytanie ze zrozumieniem i myślenie
+	- metody abstrakcyjne i rzutowanie klas
+	
+Do powtórki:
+	1) Tablice i ArrayList
+		- +Exam watch (5), +Whizlabs PDF (4), +Two minute drill (5)
+		- Self test (5)
+		- +(8/9) Section test: Creating and Using Arrays
+		
+	2) Wyjątki i sterowanie przepływem
+	    - Exam watch (6), Two minute drill (6)
+		- Whizlabs PDF (5), Whizlabs (8), 
+		- Self test (6)
+		- Section test: Using Loop Constructs
+		- Section test: Handling Exceptions
