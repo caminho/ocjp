@@ -224,4 +224,65 @@ WYJĄTKI
     się bezpośrednio po ostatnim bloku catch (lub po bloku try, jeśli nie ma żadnej
     klauzuli catch). Można pominąć klauzulę catch albo finally, ale nie obie naraz.
     
-15) 
+15) Możesz propagować wyjątek w dół stosu wywołań metod. A co jeżeli wyjątek 
+    dojdzie do metody main()? Możesz wyrzucić wyjątek również z metody main().
+    Powoduje to zatrzymanie JVM i wypisanie stack-trace'u na wyjściu.
+    
+16) Do egzaminu nie musisz znać żadnej metody w klasie Throwable, włączając do 
+    tego Exception i Error. Musisz natomiast wiedzieć to, że każdy z typów
+    Exception, RuntimeException, Error i Throwable może być wyrzucony z użyciem
+    klauzuli throw i może być złapany (chociaż żadko będzie łapał cokolwiek 
+    innego niż podtyp klasy Exception).
+    
+17) Zwróć uwagę na poniższy kod, w którym metoda wołająca nie obsługuje ani nie
+    deklaruje wyrzuconego wyjątku sprawdzanego:
+    
+	void doStuff() { doMore(); }
+	void doMore() { throw new IOException(); }  // ŹLE
+	 
+    Metoda doMore() wyrzuca sprawdzany wyjątek, którego nie deklaruje! Taki kod
+    się nie skompiluje. Ale jeśli dodamy deklarację do metody doMore:
+    
+	void doMore() throws IOException { throw new IOException(); }  // OK
+
+    W dalszym ciągu metoda doStuff jest niepoprawna, ponieważ nie łapie ani
+    nie deklaruje wyjątku. Możemy zatem albo propagować wyjątek w dół stosu 
+    wywołań:
+    	
+	void doStuff() throws IOException { doMore(); }
+    	 
+    albo obsłużyć wyjątek, np. tak:
+    
+	void doStuff() { 
+		try {
+			doMore();
+		} catch(IOException e) {
+			e.printStackTrace();	
+		}
+	}
+	
+18) Kiedy obiekt podtypu Exception jest wyrzucany (z typem Exception włącznie), 
+    musi zostać obsłużony albo zadeklarowany. Takie wyjątki są nazywane wyjątkami
+    sprawdzanymi i zawierają wszystkie wyjątki oprócz podklas RuntimeException
+    (z klasą RuntimeException włącznie), które z kolei są niesprawdzane.
+    
+    Bądź gotowy na kod, w którym reguła "obsłuż albo zadeklaruj" nie jest 
+    spełniona, np.:
+	
+	class MyException extends Exception {
+		void someMethod() { 
+			doStuff(); 
+		}		
+		void doStuff() throws MyException {
+			try {
+				throw new MyException();
+			} catch (MyException me) {
+				throw me;
+			}
+		}
+	}
+	
+    Musisz umieć rozpoznać tutaj błąd kompilacji: metoda someMethod() nie 
+    obsługuje ani nie deklaruje wyjątku MyException, który jest sprawdzany.
+    
+
