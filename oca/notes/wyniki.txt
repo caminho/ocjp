@@ -34,13 +34,13 @@ Co mi słabo poszło:
 	
 Do powtórki:
 	1) Tablice i ArrayList
-		- +Exam watch (5), +Whizlabs PDF (4), +Two minute drill (5)
+		+ Exam watch (5), +Whizlabs PDF (4), +Two minute drill (5)
+		-+ Section test: Creating and Using Arrays (W-8/9)
 		- Self test (5)
-		- +(8/9) Section test: Creating and Using Arrays
 		
 	2) Wyjątki i sterowanie przepływem
-	    - Exam watch (6), Two minute drill (6)
-		- Whizlabs PDF (5), Whizlabs (8), 
+	    	+ Exam watch (6), Two minute drill (6)
+		+ Whizlabs PDF (5), Whizlabs (8), 
+		+ Section test: Using Loop Constructs (W-12/15) (E-6/10)
+		+ Section test: Handling Exceptions (W-8/9) (E-9/10)		
 		- Self test (6)
-		- Section test: Using Loop Constructs
-		- Section test: Handling Exceptions

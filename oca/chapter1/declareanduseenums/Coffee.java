@@ -2,17 +2,21 @@ enum CoffeeSize {
 	BIG(8), 
 	HUGE(10), 
 	OVERWHELMING(16) {
-		//TUTAJ CIA£O sta³ej OVERWHELMING
-		
-		// symbol wieczka - przes³oniêcie metody
+		//TUTAJ CIALO stalej OVERWHELMING
+		public int x = 5;
+		// symbol wieczka - przesloniecie metody
 		// z enuma CoffeeSize
 		public String getLidCode() {
 			return "B";
 		}
+		
+		 {
+			;
+		}
 	};
 	
 	// konstruktor
-	public CoffeeSize(int ounces) {
+	CoffeeSize(int ounces) {
 		this.ounces = ounces;
 	}
 	
@@ -45,5 +49,7 @@ public class Coffee {
 		for (CoffeeSize cs: CoffeeSize.values()) {
 			System.out.println(cs + " " + cs.getOunces());
 		}
+		
+		//CoffeeSize.OVERWHELMING.x = 3;
 	}
 }

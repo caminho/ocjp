@@ -284,5 +284,112 @@ WYJĄTKI
 	
     Musisz umieć rozpoznać tutaj błąd kompilacji: metoda someMethod() nie 
     obsługuje ani nie deklaruje wyjątku MyException, który jest sprawdzany.
-    
+ 
+-------------------------------------------------------------------------------
+STRING i STRINGBUILDER
+-------------------------------------------------------------------------------
 
+19) Pamiętaj, że klasa String ma metodę length(), która podaje liczbę znaków
+    (długość stringa), natomiast tablice obiektów mają stałą length, która
+    określa ilość elementów w tablicy. Uważaj więc na poniższy kod:
+    
+    String x = "test";
+    // int N = x.length;	// BŁĄD
+    int N = x.length();		// OK
+    
+    String[] xA = {"test"};
+    // int N = xA.length();	// BŁĄD
+    int N = xA.length;		// OK
+
+20) Obiekty StringBuilder mają swoją pojemność - capacity, która określa ile
+    znaków może pomieścić się w obiekcie.
+    Są trzy sposoby na utworzenie obiektu StringBuilder:
+    
+	1) new StringBuilder();		// domyśle capacity = 16 znaków
+	2) new StringBuilder("ab");	// capacity = 16 znaków + "ab".length = 18
+	3) new StringBuilder(x);	// capacity = x znaków (int)
+	
+    Najczęściej przy pracy ze StringBuilderem używa się metod append()
+    i insert(). Są trzy reguły do zapamiętania przy pracy ze StringBuilderem:
+    
+    	*) jeśli po użyciu instrukcji append() napis przekroczy pojemność,
+    	   zostanie ona automatycznie zwiększona
+    	*) jeśli insert() wstawia napis o indeksie mieszczącym się w pojemności,
+    	   ale napis ostateczny przekracza pojemność obiektu, zostanie ona
+    	   zwiększona automatycznie
+    	*) jeśli insert() próbuje wstawić napis o indeksie przekraczającym
+    	   bieżącą długość napisu w obiekcie, zostanie wyrzucony wyjątek
+    	   StringIndexOutOfBoundsException.
+
+21) Na egzaminie będziesz sprawdzany z wiedzy nt. różnic między obiektami 
+    klasy String i StringBuilder. Ponieważ obiekty StringBuilder można
+    zmieniać, tj. w odróżnieniu do obiektów String są mutowalne, poniższy
+    kod zadziała inaczej niż analogiczny dla klasy String:
+    
+	StringBuilder sb = new StringBuilder("abc");
+	sb.append("def");
+	System.out.println(sb); // wypisze "abcdef"
+	
+22) Sporo zadań na egzaminie używa składni zwanej "łancuchem metod". 
+    Przykład:
+
+	result = method1().method2().method3();
+	
+    Teoretycznie, dowolna ilość metod może być wywołana tym sposobem,
+    chociaż w praktyce raczej nie zobaczysz więcej niż trzy wywołania.
+    Oto jak należy rozszyfrować tę notację:
+    
+    	1. Określ, co zwraca wywołanie pierwsze z lewej (nazwijmy 
+    	   tę wartość "x").
+    	2. Użyj "x" jako obiektu, na którym wykonasz drugie z lewej 
+    	   wywołanie metody. Jeśli są tylko dwa wywołania, rezultat
+    	   drugiego stanie się wartością wyrażenia (result).
+    	3. Jeśli jest trzecie wywołanie metody, rezultat drugiego
+    	   wywołania użyj jako obiekt, na którym wykonasz trzecie
+    	   wywołanie. Rezultat trzeciego wywołania staje się wartością
+    	   wyrażenia, itd.
+
+-------------------------------------------------------------------------------
+DEFINIOWANIE KLAS
+-------------------------------------------------------------------------------
+
+23) Możesz używać znaku gwiazdki '*' (wildcard), aby zrealizować proste 
+    wyszukiwanie w pakietach lub klasach używając instrukcji 'import' lub
+    'import static'. Jeśli chcesz przeszukać pakiet java.util w poszukiwaniu
+    klas, możesz napisać:`
+    
+    Ale nie możesz przeszukiwać szerzej. np. NIE MOŻESZ użyć instrukcji import
+    aby przeszukać całe Java API np. w następujący sposób:
+    
+	import java.*;	// ŹLE - skompiluje się, ale nie zadziała w oczekiwany
+	                // sposób!
+
+-------------------------------------------------------------------------------
+UŻYWANIE INTERFEJSÓW
+-------------------------------------------------------------------------------
+
+24) Uważaj na stałe zdefiniowane w interfejsie. Każda deklaracja zmiennej
+    w interfejsie to w rzeczywistości zdefiniowanie stałej, ponieważ w mocy są
+    modyfikatory public, static i final domyślne dla każdej zmiennej 
+    w interfejsie. Poniższe definicje są równoważne:
+    
+	int x = 1;
+	public int x = 1;
+	static int x = 1;
+	final int x = 1;
+	public static int x = 1;
+	public final int x = 1;
+	static final int x = 1;
+	public static final int x = 1;  // ostateczna, domyślna wersja
+
+-------------------------------------------------------------------------------
+DEKLAROWANIE CZŁONKÓW KLAS
+-------------------------------------------------------------------------------
+
+25) Nie wolno nigdy umieszczać wielkości tablicy w jej deklaracji! Np. taki
+    kod jest błędny:
+    
+	int[5] scores;	// BŁĄD!
+	
+    Nastąpi błąd kompilacji. Rozmiar jest bowiem ustalany dopiero przy 
+    tworzeniu instancji tablicy.
