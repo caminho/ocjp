@@ -393,3 +393,356 @@ DEKLAROWANIE CZŁONKÓW KLAS
 	
     Nastąpi błąd kompilacji. Rozmiar jest bowiem ustalany dopiero przy 
     tworzeniu instancji tablicy.
+    
+-------------------------------------------------------------------------------
+KAPSUŁKOWANIE
+-------------------------------------------------------------------------------
+
+26) Uważaj na pytania, w których jest pytanie o zachowanie programu, 
+    a rzeczywistym problemem jest brak kapsułkowania. Spójrz na poniższy
+    przykład:
+    
+    	class Foo {
+    		public int left = 9;
+    		public int right = 3;
+    		public void setLeft(int leftNum) {
+    			left = leftNum;
+    			right = leftNum/3;
+    		}
+    		// tu dalej jakiś złożony kod
+    	}
+    	
+    Teraz rozważ pytanie: czy wartość right zawsze będzie równa 1/3
+    wartości left? Na pierwszy rzut oka tak, do póki nie zauważysz, że
+    użytkownik klasy Foo nie musi użyć metody setLeft, aby zmienić wartość 
+    zmiennej left! Zmienna left ma dostęp publiczny i klient klast może po 
+    prostu przypisać jej jakąś wartość. 
+
+-------------------------------------------------------------------------------
+PRZESŁANIANIE/PRZECIĄŻANIE
+-------------------------------------------------------------------------------
+
+27) Jeśli metoda jest przesłonięta ale używasz polimorficznej referencji 
+    wskazującej na obiekt podtypu z przesłoniętą metodą, kompilator zakłada, że
+    wywołujesz wersję metody z nadklasy. Jeśli wersja z nadklasy deklaruje 
+    wyjątek sprawdzany, a metoda przesłaniające nie deklaruje go, kompilator 
+    wciąż myśli, że wywołujesz metodę, która deklaruje sprawdzany wyjątek.
+    Spójrz na przykład:
+	
+	class A {
+		void method() throws Exception {}
+	}
+	class B {
+		void method() {} // usuwa wyjątek z deklaracji!
+	}
+	public class Test {
+		public static void main(String[] args) {
+			A a = new B();
+			B b = new B();
+			b.method();		// OK
+			a.method();		// BŁĄD - wyjątek nieobsłużony!
+		}
+	}
+	
+    Kod ten się nie skompiluje z powodu wyjątku Exception zadeklarowanego 
+    w metodzie method() w klasie A. Błąd występuje nawet wtedy, jeśli 
+    dynamiczne wywoływana metoda z podklasy faktycznie nie deklaruje żadnego 
+    wyjątku.
+
+28) Uważaj, aby dobrze rozpoznać, kiedy metoda jest przesłonięta, a kiedy
+    przeciążona. Możesz zobaczyć metodę, która zdaje się naruszać reguły 
+    przesłaniania, a w rzeczywistości jest poprawną metodą przeciążoną, np.:
+     
+	public class Foo {
+		public void doStuff(int y, String s) {}
+		public void moreThings(int x) {}
+	}
+	class Bar extends Foo {
+		public void doStuff(int y, Long s) throws IOException {}
+	}
+	
+    Możesz mieć złudzenie, że rzucanie wyjątku IOException jest problemem, 
+    ponieważ metoda w nadklasie nie deklaruje takiego wyjątku, ale metoda 
+    doStuff() nie jest przesłonięta! Jest przeciążona, ponieważ ma inną listę 
+    argumentów.
+    
+29) Pamiętaj, że możesz przeciążać metodę main():
+
+	class DuoMain {
+		public static void main(String[] args) {
+			main(1);
+		}
+		static void main(int i) {
+			System.out.println("overloaded main");
+		}
+	}
+
+30) Nie daj się zwieść metodzie, która jest przeciążona, ale nie jest 
+    przesłonięta w podklasie! Poprawny jest poniższy kod:
+
+	class Foo {
+		void doStuff() {}
+	}
+	class Bar extends Foo {
+		void doStuff(String a) {}
+	}
+
+    Klasa Bar ma dwie metody o nazwie doStuff: bezargumentową wersję, którą
+    dziedziczy z Foo (i nie przesłania) oraz przeciążoną, przyjmującą 
+    argument typu String, zdefiniowaną w klasie Bar. Kod z referencją klasy
+    Foo może wywołać tylko wersję bezargumentową (ponieważ tylko taka jest
+    znana w czasie kompilacji), ale kod z referencją typu Bar ma dostęp do
+    obu przeciążonych metod.
+
+31) Uważaj na z pozoru skomplikowaną składnię rzutowania "na skróty". 
+    Kod:
+
+	Animal a = new Dog();	// Dog jest klasą pochodną klasy Animal
+	Dog d = (Dog) a;
+	d.doDogStuff();
+	
+    można zapisać jako:
+
+	Animal a = new Dog();
+	((Dog)a).doDogStuff();
+	
+    Wszystkie pary nawiasów są tu niezbędne dla kompilatora.
+
+32) Zwracaj uwagę na niepoprawne użycie extends i implements. Poniższe 
+    przykłady przedstawiają poprawne i niepoprawne deklaracje klas oraz
+    interfejsów: 
+
+	class Foo {}					// OK
+	class Bar implements Foo {}			// BŁĄD
+	interface Baz {}				// OK
+	interface Fi {}					// OK
+	interface Fee implements Baz {}			// BŁĄD
+	interface Zee implements Foo {} 		// BŁĄD
+	interface Zoo extends Foo {}			// BŁĄD
+	interface Boo extends Fi {}			// OK
+	class Toon extends Foo,Button {}		// BŁĄD
+	class Zoom implements Fi, Baz			// OK
+	interface Vroom extends Fi, Baz {}		// OK
+	class Yow extends Foo implements Fi {}		// OK
+	class Yow extends Foo implements Fi, Baz {}	// OK 
+
+    Zanim zaczniesz zagłębiać się w logikę kodu, sprawdź, czy deklaracje
+    klas i interfejsów są w ogóle poprawne!
+
+33) Na egzaminie pamiętaj, że metody przeciążone mogą mieć dowolne typy 
+    zwracane (muszą się różnić przynajmniej listą argumentów), ale metody
+    przesłaniające mogą zmieniać typ tylko w zakresie typów kowariantnych
+    z typem zwracanym w nadklasie.
+
+34) Uważaj na metody, których typ zwracany to klasa abstrakcyjna lub 
+    interfejs i pamiętaj, że każdy obiekt, który spełnia relację IS-A
+    (tj. obiekt instanceof TypZwracany ma wartość true) może być zwrócony
+    przez tą metodę. Np.:
+    
+	public abstract class Animal {}
+	public class Bear extends Animal {}
+	
+	public class Test {
+		public Animal go() {
+			return new Bear();	// OK, Bear IS-A Animal
+		}
+	}
+	
+    Ten kod się kompiluje, a typ wartości zwracanej jest podtypem.
+
+-------------------------------------------------------------------------------
+KONTRUKTORY I TWORZENIE INSTANCJI KLAS
+-------------------------------------------------------------------------------
+
+35) Bloki inicjalizujące zazwyczaj znajdują się na górze klasy, ale nie zdziw 
+    się, jeśli na egzaminie w zadaniu znajdziesz blok sprytnie ukryty w środku
+    klasy, czający się gdzieś między metodami i zmiennymi instancji.
+
+-------------------------------------------------------------------------------
+ELEMENTY STATYCZNE
+-------------------------------------------------------------------------------
+
+36) Jednym z częstszych błędów jest próba dostępu do zmiennej instancji 
+    z poziomu metody statycznej, np. main():
+	
+	class Foo {
+		int x = 3;
+		public static void main(String[] args) {
+			System.out.println("x is " + x);  // ŹLE
+		}
+	}
+	
+    Ten kod się nie skompiluje, ponieważ nie możesz dostać się do niestatycznej
+    zmiennej (instancji) z metody statycznej. Oczywiście na egzaminie ten 
+    problem może być sprytnie ukryty w kodzie tak, aby odwrócić twoją uwagę.
+    Przykład:
+	
+	class Foo {
+		int x = 3;
+		float y = 4.3f;
+		public static void main(String[] args) {
+			for (int z = x; z < ++x; z--, y = y+z) {
+				// tutaj skomplikowana logika
+			}
+		}
+	}
+    
+    Zanim skupisz się na logice kodu, sprawdź, czy metoda ma dostęp (czy 
+    ją widzi) do zmiennej, która została w niej użyta. To samo tyczy się metod
+    instancji.
+
+-------------------------------------------------------------------------------
+LITERAŁY, PRZYPISANIA I ZMIENNE
+-------------------------------------------------------------------------------
+
+37) Poprawna jest deklaracja wielu zmiennych w jednej linii:
+
+	int a, b, c;
+	
+    Poprawne jest też zainicjalizowanie tych zmiennych:
+    
+	int j, k=1, l, m=3;
+	
+    Każda z tych zmiennych ewaluowana jest od lewej po prawej, tak, jak gdyby
+    zadeklarować je w osobnych liniach:
+    
+	int j;
+	int k=1;
+	int l;
+	int m=3;
+	
+    Ale kolejność jest istotna. To jest poprawne:
+    
+    	int j, k=1, l, m=k+3;
+    	
+    Ale to już nie jest:
+    
+	int j, k=m+3, l, m=1;	// ŹLE: m jest niezainicjalizowane przed 
+				// użyciem w k
+	int x, y = x+1, z;	// ŹLE: x jest niezainicjalizowane przed 
+				// użyciem w y
+
+38) Na egzaminie mogą pojawić się pytania, w których użyto obiektów 
+    opakowujących, np.:
+	
+	Long x = new Long(42);
+	Short y = new Short("57");
+	
+    Obiekt "wrapper" to obiekt, który trzyma wartość zmiennej prymitywnej. 
+    Każdy typ prymitywny ma swój odpowiednik w postaci klasy opakowującej:
+    Boolean, Byte, Character, Double, Float, Integer, Long i Short. 
+    Drukowanie wrappera, np.:
+    
+    	System.out.println(x + " " + s);
+    	
+    Da w rezultacie:
+    	42 57
+
+-------------------------------------------------------------------------------
+ZAKRES ZMIENNYCH
+-------------------------------------------------------------------------------
+
+39) Uważaj na błędy zakresu, gdy zmienna blokowa (tj. zadeklarowana 
+    w bloku, np. w instrukcji switch, for, do itd.) używana jest poza 
+    blokiem, gdzie nie jest widoczna.
+
+-------------------------------------------------------------------------------
+INICJALIZOWANIE ZMIENNYCH
+-------------------------------------------------------------------------------
+
+40) Zmienne automatyczne to inaczej zmienne lokalne - nie oznacza to, że 
+    zmienne "automatycznie" otrzymują wartość domyślną! Jest wręcz na odwrót -
+    zmienna automatyczna musi otrzymać wartość przed jej użyciem, inaczej
+    kompilator zaprotestuje.
+
+-------------------------------------------------------------------------------
+OPERATORY
+-------------------------------------------------------------------------------
+
+41) Tych tematów nie ma na egzaminie: 
+      - operatory przesuwania bitowego
+      - operatory działające na bitach
+      - dopełnienie do 2
+      - dzielenie przez 0                                                                                                              
+
+42) Używając operatora przypisania złożonego, pamiętaj, że wyrażenie na prawo
+    od znaku równości ujmowane jest w nawiasy i obliczane jako pierwsze!
+    Np. wyrażenie:
+	x *= 2+5;
+    nie zostanie wbrew pozorom potraktowane jako:
+	x = (x * 2) + 5;
+    tylko jako:
+	x = x * (2 + 5);
+
+43) Zwracaj uwagę na użycie operatora instanceof w zadaniach, w których
+    zmienna sprawdzana jest pod kątem bycia instancją interfejsu podczas, gdy
+    klasa tego obiektu implementuje go nie bezpośrednio. Pośrednia 
+    implementacja występuje, gdy interfejs jest implementowany przez którąś
+    nadklasę w hierarchii klasy, ale nie przez klasę sprawdzanego obiektu.
+    Przykład:
+	
+	interface Foo {}
+	class A implements Foo {}
+	class B extends A {}
+	...
+	A a = new A();
+	
+	B b = new B();
+    Dla powyższego, następujące wyrażenia są prawdziwe:
+	
+	a instanceof Foo
+	a instanceof A
+	b instanceof Foo	// implementacja pośrednia
+	
+    Mówimy, że obiekt jest typu danego interfejsu (jest instancją interfejsu)
+    jeśli jego klasa, lub któraś nadklasa w hierarchii dziedziczenia 
+    implementuje ten interfejs.
+    
+44) Pamiętaj, że każda tablica jest obiektem, nawet jeśli jest to tablica
+    wartości prymitywnych. Jako obiekt, zawsze spełnia wyrażenie
+
+	zmienna instanceof Object;
+
+    o ile nie jest nullem. Więc uważaj np. na taki kod:
+    
+	int []nums = new int[3];
+	if (nums instanceof Object) {}	// zawsze zwraca true
+	
+45) Operatory dzielenia i reszty z dzielenia w kontekście liczb całkowitych
+    mają ciekawą relację:
+      - operator modulo usuwa z liczby wszystko poza resztą z dzielenia
+      - operator dzielenia usuwa resztę z dzielenia
+
+46) Zrozum dobrze, jak działa konkatenacja stringów, ponieważ występuje prawie
+    w każdym zadaniu. Np. możesz zobaczyć coś takiego:
+
+	int b = 2;
+	System.out.println("" + b + 3);
+
+    Na wyjściu będzie:
+	23
+    Ale jeśli wyrażenie zamienimy na:
+
+	System.out.println(b + 3);
+
+    Wynikiem będzie:
+	5
+
+47) Zwracaj uwagę na kod, który próbuje zmienić wartość zmiennej oznaczonej
+    jako final. Kod taki się nie skompiluje. Przykład:
+
+	final int x = 5;
+	int y = x++;
+
+    Nie możesz stosować operatorów przypisania złożonego ani operatorów
+    inkrementacji/dekrementacji na zmiennych finalnych! Kompilator tego
+    nie przełknie. Jeśli więc dostrzeżesz tego typu manewry w treści zadania
+    nie trać czasu na zagłębianie się w kod, bo on się nawet nie skompiluje.
+
+48) Uproszczone operatory koniunkcji i alternatywny logicznej działają tylko
+    na operandach typu boolean. Nie daj się więc nabrać na taki kod:
+
+	if (5 && 6) {}
+
+    Może to wyglądać na koniunkcję bitową, ale ten kod się nie skompiluje.
+
