@@ -22,6 +22,9 @@ public class StringTest {
 			System.out.println("Hola hola!");	
 		}
 		
+		Object o1 = new String("abcd");
+		System.out.println(o1.equals("abcd"));
+		
 	}
 	
 	public static void printHashCode(String var, Object obj) {
