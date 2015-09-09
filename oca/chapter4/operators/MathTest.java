@@ -16,6 +16,9 @@ public class MathTest {
 		
 		final int z;
 		z = 7;
-		// z++; LE
+		// z++; ZLE
+		
+		System.out.println(.02);
+		System.out.println(2.);
 	}
 }

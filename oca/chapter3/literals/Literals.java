@@ -3,15 +3,15 @@ public class Literals {
 		
 		// Litera≥y dziesiÍtne
 		{
-			// Podkreúlenia
+			// Podkre∂lenia
 			int pre7 = 1000000;
 			int with7 = 1_000_000;
-			//int with7 = _1_000_000;	èLE
-			//int with7 = 1_000_000_;	èLE
+			//int with7 = _1_000_000;	//¨LE
+			//int with7 = 1_000_000_;	//¨LE
 			int other = 123___4_____5_6;
 			double x = 1_2_3.4_5_6;
 			int bin = 0b0101_1111_1111;
-			//int bin = 0b_0101_1111_1111;	èLE
+			//int bin = 0b_0101_1111_1111;	//¨LE
 			
 			// Liczby dziesiÍtne
 			int length = 343;
@@ -36,7 +36,7 @@ public class Literals {
 			
 			// Long
 			long longNumber = 0b1010101_0L;
-			//long longNumber = 0b1010101_0_L; èLE
+			//long longNumber = 0b1010101_0_L; //¨LE
 		}
 		
 		// Litera≥y zmiennoprzecinkowe
@@ -45,7 +45,7 @@ public class Literals {
 			double d2 = 123.456d;	// sufiks opcjonalny
 			double d3 = 123.456D;	// sufiks opcjonalny
 			
-			// float f1 = 123.345; èLE
+			// float f1 = 123.345; //¨LE
 			float f1 = 123.345f; 
 			float f2 = 123.345F; 
 			float f3 = (float)123.345; // konwersja!
@@ -55,7 +55,7 @@ public class Literals {
 		{
 			boolean bool1 = true;
 			boolean bool2 = false;
-			// boolean bool3 = 0; èLE
+			// boolean bool3 = 0; //¨LE
 		}
 		
 		// Litera≥y znakowe
@@ -67,9 +67,9 @@ public class Literals {
 			char b = 982;
 			char c = (char)7000;
 			char d = (char) -98;
-			//char e = -29; èLE - potrzebne rzutowanie
+			//char e = -29; //¨LE - potrzebne rzutowanie
 			char f1 = 65535;
-			//char f2 = 65536; èLE - przekracza zakres
+			//char f2 = 65536; //¨LE - przekracza zakres
 			char f2 = (char)65536;
 			System.out.println((int)f2);
 		}
@@ -80,3 +80,4 @@ public class Literals {
 		}
 	}
 }
+
