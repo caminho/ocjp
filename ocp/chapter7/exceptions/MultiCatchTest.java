@@ -34,6 +34,12 @@ public class MultiCatchTest {
 			System.out.println("poprawne uzycie multi-catch");
 			//e = new MyException(); // BLAD: nie mozna przypisac nic do 
 			// parametru catch w przypadku multi-catch
+			if (e instanceof MyException) {
+				System.out.println("MyException");
+			}
+			if (e instanceof OtherException) {
+				System.out.println("OtherException");
+			}
 		}		
 	}
 	
