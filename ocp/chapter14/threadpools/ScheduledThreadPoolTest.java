@@ -3,7 +3,6 @@ import java.util.concurrent.*;
 public class ScheduledThreadPoolTest {
 
 	static class Routine implements Runnable {
-		
 		private String msg;
 		
 		public Routine(String msg) {
@@ -24,8 +23,6 @@ public class ScheduledThreadPoolTest {
 		scheduledThreadPool.schedule(
 				new Routine("once"), 1, TimeUnit.SECONDS);
 		scheduledThreadPool.scheduleAtFixedRate(
-				new Routine("every second"), 2, 1, TimeUnit.SECONDS);
-		
-		
+				new Routine("every second"), 2, 1, TimeUnit.SECONDS);		
 	}
 }
