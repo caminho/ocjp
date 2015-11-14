@@ -2,7 +2,7 @@ import java.io.*;
 
 
 class A {
-	A() throws IOException  {}
+	//A() throws IOException  {}
 }
 
 class B extends A {
@@ -11,8 +11,8 @@ class B extends A {
 error: unreported exception IOException; must be caught or declared to be thrown
 	B() throws FileNotFoundException, IllegalArgumentException {
 */
-	B() throws FileNotFoundException, IllegalArgumentException {
-	}
+	//B() throws FileNotFoundException, IllegalArgumentException {
+	//}
 }
 
 class MyException extends Exception {}
@@ -23,7 +23,7 @@ public class ExceptionTest {
 		//int i = 1/0;
 	}
 
-	public static void main(String[] args)  {
+	public static void main(String[] args) throws CloneNotSupportedException {
 		ExceptionTest tc = new ExceptionTest();
 		try{
 			tc.m1();
@@ -35,6 +35,9 @@ public class ExceptionTest {
 			//tc.m3();
 			//throw new NullPointerException();
 		}
+		
+		new CloneMe().clone();
+		
 	}
 	
 	public void m1() throws MyException{
@@ -47,6 +50,14 @@ public class ExceptionTest {
 	
 	public void m3() throws RuntimeException{
 		throw new NullPointerException();
+	}
+}
+
+
+class CloneMe implements Cloneable {
+
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }
 
