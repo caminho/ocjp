@@ -1,7 +1,7 @@
 import java.sql.*;
 
-public class ShowCustomers {
-
+public class ShowBook {
+	
 	private Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(
 			DBInfo.url, 
@@ -14,21 +14,19 @@ public class ShowCustomers {
 		
 		try (Connection conn = getConnection();
 				Statement stmt = conn.createStatement()) {
-			String query = "SELECT * from Customer";
+			String query = "SELECT * from Book";
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				System.out.print(rs.getInt("CustomerID") + " ");
-				System.out.print(rs.getString("FirstName") + " ");
-				System.out.print(rs.getString("LastName") + " ");
-				System.out.print(rs.getString("EMail") + " ");
-				System.out.println(rs.getString("phone"));
+				System.out.print(rs.getString("ISBN") + " ");
+				System.out.print(rs.getDate("PubDate") + " ");
+				System.out.println(rs.getInt("Price"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
-
+	
 	public static void main(String[] args) {
-		new ShowCustomers().go();
+		new ShowBook().go();
 	}
 }

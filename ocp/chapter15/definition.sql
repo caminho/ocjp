@@ -19,9 +19,9 @@ CREATE TABLE Author (
 
 CREATE TABLE Book (
 	ISBN		VARCHAR(20) PRIMARY KEY,
-	Title		VARCHAR(100),
-	PubDate		VARCHAR(100),
-	Format		VARCHAR(100),
+	Title		VARCHAR(30),
+	PubDate		VARCHAR(10),
+	Format		VARCHAR(15),
 	Price		float
 );
 
