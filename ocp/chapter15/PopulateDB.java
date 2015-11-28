@@ -31,7 +31,7 @@ public class PopulateDB {
 		Path path = Paths.get(filePath);
 		List<String> sqlStatements = new ArrayList<>();
 		try (Scanner scanner = new Scanner(path)) {
-			scanner.useDelimiter(";");
+			scanner.useDelimiter(";;");
 			while (scanner.hasNext()) {
 				String statement = scanner.next()
 						.replaceAll("\\s+", " ")

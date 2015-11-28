@@ -17,13 +17,12 @@ public class TableReport {
 		return String.format("%1$-" + n + "s", s);
 	}
 	
-	public void go() {
+	public void go(String table) {
 		
 		try (Connection conn = getConnection();
 				Statement stmt = conn.createStatement()) {
 					
-			String query = "SELECT * from Book";
-			
+			String query = "SELECT * from " + table;
 			ResultSet rs = stmt.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int cols = rsmd.getColumnCount();
@@ -54,6 +53,8 @@ public class TableReport {
 	}
 	
 	public static void main(String[] args) {
-		new TableReport().go();
+		if (args.length == 0) 
+			return;
+		new TableReport().go(args[0]);
 	}
 }
