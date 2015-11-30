@@ -1,0 +1,60 @@
+PLAN
+
+29	- Sprawdzić TEST 2 (+fiszki)
+
+30	- Powtórka z Rozdziału VII (asercje, wyjątki)
+	- Zadania z rozdziału (12)
+	- Wieczorem: TEST 3
+	
+1	- Powtórka z Rozdziału VIII (przetwarzanie tekstu, formatowanie danych, paczki zasobów)
+	- Zadania z rozdziału (13)
+	- Wieczorem: sprawdzić TEST 3 (+fiszki)
+	
+2	- Powtórka z Rozdziału IX (IO, NIO.2)
+	- Zadania z rozdziału (16)
+	- Wieczorem: TEST 4
+	
+3	- Powtórka z Rozdziału X (OO, wzorce)
+	- Zadania z rozdziału (12)
+	- Wieczorem: sprawdzić TEST 4 (+fiszki)
+	
+4	- Powtórka z Rozdziału XI (Typy generyczne, kolekcje)
+	- Zadania z rozdziału (16)
+	- TEST 5
+	- Sprawdzić TEST 5 (+fiszki)
+	06 - Exceptions and Assertions (15)
+	05 - String Processing (10)
+	12 - Localization (5)
+	
+5	- Powtórka z Rozdziału XII (Klasy wewnętrzne)
+	- Zadania z rozdziału (12)
+	- TEST 6
+	- sprawdzić TEST 6 (+fiszki)
+	01 - Java Class Design (15)
+	02 - Advanced Class Design (15)
+	03 - Object-Oriented Design Principles (15)
+	
+6	- Powtórka z Rozdziału XIII (Wątki)
+	- Powtórka z Rozdziału XIV (Współbieżność)
+	- Zadania z rozdziału XIII (17)
+	- Zadania z rozdziału XIV (14)
+	04 - Generics and Collections
+	07 - File I/O Fundamentals
+	08 - NIO 2
+	- TEST 7
+	- Sprawdzić TEST 7 (+fiszki)
+	
+7	- Powtórka z Rozdziału XV (JDBC)
+	- Zadania z rozdziału (15)
+	10 - Threads (15)
+	11 - Concurrency (10)
+	09 - JDBC (10)
+	- TEST 8
+	- Sprawdzić TEST 8 (+fiszki)
+
+8	- Nauka zadań nierozwiązanych
+	
+9	- FINAL TEST
+	- relaks
+
+10	- EGZAMIN, 9:30 
