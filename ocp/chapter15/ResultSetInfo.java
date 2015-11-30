@@ -1,18 +1,10 @@
 import java.sql.*;
 
 public class ResultSetInfo {
-	
-	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(
-			DBInfo.url, 
-			DBInfo.user, 
-			DBInfo.password
-		);
-	}
 
 	public void go() {
 		
-		try (Connection conn = getConnection();
+		try (Connection conn = DBInfo.getConnection();
 				Statement stmt = conn.createStatement()) {
 			String query = "SELECT AuthorID from Author";
 			ResultSet rs = stmt.executeQuery(query);

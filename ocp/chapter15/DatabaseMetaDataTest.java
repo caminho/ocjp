@@ -1,18 +1,10 @@
 import java.sql.*;
 
 public class DatabaseMetaDataTest {
-	
-	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(
-			DBInfo.url, 
-			DBInfo.user, 
-			DBInfo.password
-		);
-	}
 
 	public void go() {
 		
-		try (Connection conn = getConnection()) {
+		try (Connection conn = DBInfo.getConnection()) {
 			DatabaseMetaData dbmd = conn.getMetaData();
 			
 			if (dbmd.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)) {
