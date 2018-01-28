@@ -81,5 +81,32 @@ public class MapExamples {
         counts.computeIfPresent("Jenny", (k, v) -> null);
         counts.computeIfAbsent("Sam", k -> null);
         System.out.println(counts);
+
+        /*
+        {Tomek=null, Jenny=Bus tour}
+
+        putIfAbsent
+        {Mickey=Car, Tomek=Metro, Jenny=Bus tour}
+
+        merge
+        {Tom=Skyride, Jenny=Bus Tour, Sam=Skyride}
+        Bus Tour
+        Skyride
+        Skyride
+
+        {Tom=Bus Tour, Sam=Skyride}
+
+        computeIfPresent
+        {Jenny=2}
+        2
+        null
+
+        computeIfAbsent
+        {Tom=1, Jenny=15, Sam=1}
+        15
+        1
+        1
+        {}
+         */
     }
 }
