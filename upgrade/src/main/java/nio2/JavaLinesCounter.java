@@ -26,7 +26,7 @@ public class JavaLinesCounter {
         sys     0m0.277s
          */
 
-        Path dir = Paths.get("/Users/tomek/ideaProjects/practical-unit-testing");
+        Path dir = Paths.get("/Users/tomek/ideaProjects");
         try {
             /*
             7780
@@ -34,9 +34,10 @@ public class JavaLinesCounter {
              */
             long start = System.currentTimeMillis();
             long javaLines = Files.find(dir, Integer.MAX_VALUE,
-                    (p, a) -> a.isRegularFile() && p.toString().endsWith(".java"))
+                    (p, a) -> a.isRegularFile() &&
+                            p.toString().endsWith(".java")
+                            && !p.toString().contains("ocjp"))
                     .flatMap(JavaLinesCounter::lines)
-                    .filter(s -> !s.equals("\n"))
                     .count();
             long duration = System.currentTimeMillis() - start;
             System.out.println(javaLines);

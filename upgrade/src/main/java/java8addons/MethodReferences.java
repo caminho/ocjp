@@ -2,6 +2,7 @@ package java8addons;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -138,5 +139,13 @@ public class MethodReferences {
         Supplier<Duck.Leg> legSupplierLambda = () -> leggedDuck.new Leg();
 
         Supplier<Duck.StaticLeg> legSupplierRef = Duck.StaticLeg::new;
+
+        SupplierArg<Duck, String> duckWithName = Duck::new;
+
+        Function<String, Duck> nameToDuck = Duck::new;
+    }
+
+    interface SupplierArg<T,U> {
+        T supply(U u);
     }
 }

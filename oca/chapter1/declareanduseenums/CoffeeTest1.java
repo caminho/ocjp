@@ -1,5 +1,5 @@
-// enum na zewn¹trz klasy - 
-// nie mo¿e byæ private ani protected!
+// enum na zewnÄ…trz klasy -
+// nie moÅ¼e byÄ‡ private ani protected!
 enum CoffeeSize { 
 	BIG,
 	HUGE,
