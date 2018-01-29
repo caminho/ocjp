@@ -1,6 +1,7 @@
 package nio2;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,7 +11,7 @@ public class JavaLinesCounter {
 
     private static Stream<String> lines(Path p) {
         try {
-            return Files.lines(p);
+            return Files.lines(p, StandardCharsets.ISO_8859_1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -19,24 +20,23 @@ public class JavaLinesCounter {
     public static void main(String[] args) {
 
         /*
-        time find /Users/tomek/ideaProjects/ocjp -name "*.java" -exec cat {} \; | wc -l
-        7778
-        real    0m0.789s
-        user    0m0.318s
-        sys     0m0.277s
+        $ time find /Users/tomek/ideaProjects -name "*.java" -exec cat {} \; | wc -l
+          185925
+
+        real    0m11.082s
+        user    0m4.356s
+        sys     0m4.123s
          */
 
         Path dir = Paths.get("/Users/tomek/ideaProjects");
         try {
             /*
-            7780
-            Time: 0.398
+            186220
+            Time: 7.519
              */
             long start = System.currentTimeMillis();
             long javaLines = Files.find(dir, Integer.MAX_VALUE,
-                    (p, a) -> a.isRegularFile() &&
-                            p.toString().endsWith(".java")
-                            && !p.toString().contains("ocjp"))
+                    (p, a) -> a.isRegularFile() && p.toString().endsWith(".java")).parallel()
                     .flatMap(JavaLinesCounter::lines)
                     .count();
             long duration = System.currentTimeMillis() - start;
