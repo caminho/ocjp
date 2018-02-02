@@ -70,6 +70,16 @@ public class TerminalOperations {
                 (b, d) -> b.multiply(BigDecimal.valueOf(d)),
                 BigDecimal::multiply));
 
+        Integer lengthSum = Stream.of("hello", "world", "I", "am", "back")
+                .reduce(0, (s1, s2) -> s1 + s2.length(), (s1, s2) -> s1 + s2);
+        System.out.println(lengthSum);
+
+        System.out.println(Stream.of("hello", "world", "I", "am", "back")
+                .collect(Collectors.summingInt(String::length)));
+
+        System.out.println(Stream.of("hello", "world", "I", "am", "back")
+                .mapToInt(String::length).sum());
+
         // collect examples
         System.out.println("---");
         Stream<String> stream15 = Stream.of("w", "o", "l", "f");
