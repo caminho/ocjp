@@ -1,11 +1,23 @@
 package datetime;
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 public class DaylightSavings {
+
     public static void main(String[] args) {
-        czasLetni();
-        czasZimowy();
+        LocalDateTime ld1 = LocalDateTime.of(2015, Month.NOVEMBER, 1, 2, 0);
+        System.out.println(ld1);
+        ZonedDateTime zd1 = ZonedDateTime.of(ld1, ZoneId.of("US/Eastern"));  // 2:0 gmt-5 -> 7:00 UTC
+        System.out.println(zd1);
+        LocalDateTime ld2 = LocalDateTime.of(2015, Month.NOVEMBER, 1, 1, 0);// 1:00 gmt-4 -> 5:00 UTC
+        System.out.println(ld2);
+        ZonedDateTime zd2 = ZonedDateTime.of(ld2, ZoneId.of("US/Eastern"));
+        System.out.println(zd2);
+        System.out.println(zd2.plusHours(1));
+
+        System.out.println();
+        long x = ChronoUnit.HOURS.between(zd1, zd2); System.out.println(x);
     }
 
     private static void czasZimowy() {
